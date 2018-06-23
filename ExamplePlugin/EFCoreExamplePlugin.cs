@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Rocket.API.DependencyInjection;
 using Rocket.API.Plugins;
 using Rocket.Core.Plugins;
-using Rocket.Core.Util;
 using Rocket.EntityFrameworkCore;
 
 namespace ExamplePlugin
@@ -18,12 +17,10 @@ namespace ExamplePlugin
 
         protected override void OnLoad(bool isFromReload)
         {
-            DebugUtils.WaitForDebugger(false);
-
             base.OnLoad(isFromReload);
 
             this.AddEntityFrameworkCore()
-                .EnableAutoMigrations();
+                .EnableAutoCreation();
 
             var context = this.GetDbContext<MyDbContext>();
 
