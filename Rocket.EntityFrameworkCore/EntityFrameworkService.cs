@@ -29,17 +29,6 @@ namespace Rocket.EntityFrameworkCore
                 var pluginContext = (PluginDbContext) plugin.Container.Activate(type);
                 _contexts[plugin].Add(pluginContext);
             }
-
-            var currentDir = new DirectoryInfo(GetType().Assembly.Location).Name;
-            var driversDir = Path.Combine(currentDir, "EFDrivers");
-            if (!Directory.Exists(driversDir))
-                Directory.CreateDirectory(driversDir);
-
-            foreach (var file in Directory.GetFiles(driversDir))
-            {
-                if (file.EndsWith(".dll"))
-                    Assembly.LoadFile(file);
-            }
         }
 
         public T GetDbContext<T>(IPlugin plugin) where T : PluginDbContext
