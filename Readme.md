@@ -1,0 +1,1 @@
+# Rocket.EntityFrameworkCore [![Build status](https://ci.appveyor.com/api/projects/status/n8vs6gdifa9y7x0y?svg=true)](https://ci.appveyor.com/project/RocketMod/rocket-entityframeworkcore/)
