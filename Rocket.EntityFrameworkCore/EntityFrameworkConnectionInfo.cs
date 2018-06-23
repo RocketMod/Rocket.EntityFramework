@@ -1,6 +1,6 @@
 ﻿namespace Rocket.EntityFrameworkCore
 {
-    public class ConnectionProviderInfo
+    public class EntityFrameworkConnectionInfo
     {
         public string ProviderName { get; set; }
         public string ConnectionName { get; set; }

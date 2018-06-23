@@ -2,6 +2,6 @@
 {
     public interface IEntityFrameworkConnectionDescriptor
     {
-        ConnectionProviderInfo ConnectionProviderInfo { get; }
+        EntityFrameworkConnectionInfo ConnectionInfo { get; }
     }
 }

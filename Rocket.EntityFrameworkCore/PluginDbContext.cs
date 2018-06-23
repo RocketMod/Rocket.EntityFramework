@@ -17,11 +17,11 @@ namespace Rocket.EntityFrameworkCore
 
         protected PluginDbContext(IPlugin plugin, IEntityFrameworkConnectionDescriptor descriptor)
         {
-            ConnectProviderInfo = descriptor.ConnectionProviderInfo;
+            ConnectProviderInfo = descriptor.ConnectionInfo;
             _plugin = plugin;
         }
 
-        public ConnectionProviderInfo ConnectProviderInfo { get; }
+        public EntityFrameworkConnectionInfo ConnectProviderInfo { get; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
