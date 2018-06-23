@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Rocket.API;
 using Rocket.API.Eventing;
 using Rocket.API.Plugins;
 using Rocket.Core.DependencyInjection;
@@ -13,6 +14,11 @@ namespace Rocket.EntityFrameworkCore
 {
     public class EntityFrameworkService : IEntityFrameworkService, IEventListener<PluginUnloadEvent>
     {
+        public EntityFrameworkService(IRuntime runtime, IEventManager eventManager)
+        {
+            eventManager.AddEventListener(runtime, this);
+        }
+
         private readonly Dictionary<IPlugin, List<PluginDbContext>> _contexts = new Dictionary<IPlugin, List<PluginDbContext>>();
 
         public void RegisterContextsByConvention(IPlugin plugin, EntityFrameworkBuilder entityFrameworkBuilder)
