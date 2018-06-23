@@ -24,7 +24,7 @@ namespace Rocket.EntityFrameworkCore
             {
                 if (_context == null)
                 {
-                    _context = new ConfigurationContext(_runtime.WorkingDirectory, "Rocket.EntityFramework");
+                    _context = new ConfigurationContext(_runtime.WorkingDirectory, "Rocket.EntityFrameworkCore");
                     _config.Load(_context, new EntityFrameworkProvidersConfiguration());
                 }
                 var conf = _config.Get<EntityFrameworkProvidersConfiguration>();
