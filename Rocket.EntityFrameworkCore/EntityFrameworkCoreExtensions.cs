@@ -2,9 +2,9 @@
 
 namespace Rocket.EntityFrameworkCore
 {
-    public static class EntityFrameworkExtensions
+    public static class EntityFrameworkCoreExtensions
     {
-        public static void AddEntityFramework(this IPlugin plugin)
+        public static void AddEntityFrameworkCore(this IPlugin plugin)
         {
             plugin.Container.Resolve<IEntityFrameworkService>().RegisterContextsByConvention(plugin);
         }
