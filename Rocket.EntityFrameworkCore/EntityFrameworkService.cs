@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using Rocket.API.Eventing;
 using Rocket.API.Plugins;
 using Rocket.Core.DependencyInjection;
@@ -26,17 +25,30 @@ namespace Rocket.EntityFrameworkCore
 
             foreach (var type in contextTypes)
             {
-                var pluginContext = (PluginDbContext) plugin.Container.Activate(type);
+                var pluginContext = (PluginDbContext)plugin.Container.Activate(type);
                 _contexts[plugin].Add(pluginContext);
             }
         }
 
         public T GetDbContext<T>(IPlugin plugin) where T : PluginDbContext
         {
-            if(!_contexts.ContainsKey(plugin))
+            if (!_contexts.ContainsKey(plugin))
                 throw new Exception("Plugin is not registered! Did you forget to use AddEntityFrameworkCore()?");
 
-            return (T) _contexts[plugin].FirstOrDefault(c => c is T);
+            return (T)_contexts[plugin].FirstOrDefault(c => c is T);
+        }
+
+        public void Migrate(IPlugin plugin, PluginDbContext context)
+        {
+            context.Database.Migrate();
+        }
+
+        public IEnumerable<PluginDbContext> GetDbContexts(IPlugin plugin)
+        {
+            if (!_contexts.ContainsKey(plugin))
+                return new PluginDbContext[0];
+
+            return _contexts[plugin];
         }
 
         //unload db contexts after all other events listeners

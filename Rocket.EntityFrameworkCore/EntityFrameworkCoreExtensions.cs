@@ -15,5 +15,10 @@ namespace Rocket.EntityFrameworkCore
         {
             return plugin.Container.Resolve<IEntityFrameworkService>().GetDbContext<T>(plugin);
         }
+
+        public static void Migrate(this IPlugin plugin, PluginDbContext context)
+        {
+            plugin.Container.Resolve<IEntityFrameworkService>().Migrate(plugin, context);
+        }
     }
 }

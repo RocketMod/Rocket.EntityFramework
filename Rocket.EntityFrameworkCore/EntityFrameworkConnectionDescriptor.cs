@@ -54,13 +54,13 @@ namespace Rocket.EntityFrameworkCore
             {
                 ConnectionName = "DefaultMySqlConnection",
                 ProviderName = "MySql",
-                ConnectionString = "SERVER=localhost; DATABASE=unturned; UID=myUsername; PASSWORD=myPassword"
+                ConnectionString = "SERVER=localhost; DATABASE=myDataBase; UID=myUsername; PASSWORD=myPassword"
             },
             new ConnectionProviderInfo
             {
                 ConnectionName = "DefaultPostgreSqlConnection",
                 ProviderName = "PostgreSql",
-                ConnectionString = "MyDatabaseName"
+                ConnectionString = "User ID=root;Password=myPassword;Host=localhost;Port=5432;Database=myDataBase;"
             },
             new ConnectionProviderInfo
             {

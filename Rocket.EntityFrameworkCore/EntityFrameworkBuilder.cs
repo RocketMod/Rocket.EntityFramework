@@ -13,7 +13,15 @@ namespace Rocket.EntityFrameworkCore
             _plugin = plugin;
         }
 
-        //todo: 
-        //public IEntityFrameworkBuilder DisableAutoMigrations()
+        public IEntityFrameworkBuilder EnableAutoMigrations()
+        {
+            foreach (var context in _service.GetDbContexts(_plugin))
+            {
+                //_service.Migrate(_plugin, context);
+                context.Database.EnsureCreated();
+            }
+
+            return this;
+        }
     }
 }

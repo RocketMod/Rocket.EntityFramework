@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Rocket.API.DependencyInjection;
 using Rocket.API.Plugins;
 using Rocket.Core.Plugins;
+using Rocket.Core.Util;
+using Rocket.EntityFrameworkCore;
 
-namespace Rocket.EntityFrameworkCore.ExamplePlugin
+namespace ExamplePlugin
 {
     public class EFCoreExamplePlugin : Plugin
     {
@@ -16,8 +18,13 @@ namespace Rocket.EntityFrameworkCore.ExamplePlugin
 
         protected override void OnLoad(bool isFromReload)
         {
+            DebugUtils.WaitForDebugger(false);
+
             base.OnLoad(isFromReload);
-            this.AddEntityFrameworkCore();
+
+            this.AddEntityFrameworkCore()
+                .EnableAutoMigrations();
+
             var context = this.GetDbContext<MyDbContext>();
 
             var toAdd = new TestClass
@@ -43,6 +50,10 @@ namespace Rocket.EntityFrameworkCore.ExamplePlugin
         public virtual DbSet<TestClass> TestEntries { get; set; }
 
         public MyDbContext(IPlugin plugin, IEntityFrameworkConnectionDescriptor descriptor) : base(plugin, descriptor)
+        {
+        }
+
+        public MyDbContext(DbContextOptions options) : base(options)
         {
         }
     }
