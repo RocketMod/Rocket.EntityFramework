@@ -8,5 +8,10 @@ namespace Rocket.EntityFrameworkCore
         {
             plugin.Container.Resolve<IEntityFrameworkService>().RegisterContextsByConvention(plugin);
         }
+
+        public static T GetDbContext<T>(this IPlugin plugin) where T : PluginDbContext
+        {
+            return plugin.Container.Resolve<IEntityFrameworkService>().GetDbContext<T>(plugin);
+        }
     }
 }

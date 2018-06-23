@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -39,6 +40,14 @@ namespace Rocket.EntityFrameworkCore
                 if (file.EndsWith(".dll"))
                     Assembly.LoadFile(file);
             }
+        }
+
+        public T GetDbContext<T>(IPlugin plugin) where T : PluginDbContext
+        {
+            if(!_contexts.ContainsKey(plugin))
+                throw new Exception("Plugin is not registered! Did you forget to use AddEntityFrameworkCore()?");
+
+            return (T) _contexts[plugin].FirstOrDefault(c => c is T);
         }
 
         //unload db contexts after all other events listeners
