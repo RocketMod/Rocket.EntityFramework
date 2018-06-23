@@ -61,9 +61,16 @@ namespace Rocket.EntityFrameworkCore
                     _logger.LogDebug($"\"{_plugin.Name}\": \"{context.GetType().Name}\" was created.");
                 }
 
-                RelationalDatabaseCreator databaseCreator =
-                    (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
-                databaseCreator.CreateTables();
+                try
+                {
+                    RelationalDatabaseCreator databaseCreator =
+                        (RelationalDatabaseCreator) context.Database.GetService<IDatabaseCreator>();
+                    databaseCreator.CreateTables();
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug($"\"{_plugin.Name}\": \"{context.GetType().Name}\" failed to create tables", e);
+                }
             }
 
             _wasCreated = true;
