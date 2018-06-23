@@ -19,8 +19,9 @@ namespace ExamplePlugin
         {
             base.OnLoad(isFromReload);
 
-            this.AddEntityFrameworkCore()
-                .EnableAutoCreation();
+            this.GetEntityFrameworkCoreBuilder()
+                .EnableAutoCreation()
+                .AddEntityFrameworkCore();
 
             var context = this.GetDbContext<MyDbContext>();
 

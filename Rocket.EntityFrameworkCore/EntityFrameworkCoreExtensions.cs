@@ -4,10 +4,9 @@ namespace Rocket.EntityFrameworkCore
 {
     public static class EntityFrameworkCoreExtensions
     {
-        public static IEntityFrameworkBuilder AddEntityFrameworkCore(this IPlugin plugin)
+        public static IEntityFrameworkBuilder GetEntityFrameworkCoreBuilder(this IPlugin plugin)
         {
             var service = plugin.Container.Resolve<IEntityFrameworkService>();
-            service.RegisterContextsByConvention(plugin);
             return new EntityFrameworkBuilder(service, plugin);
         }
 

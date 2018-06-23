@@ -15,7 +15,7 @@ namespace Rocket.EntityFrameworkCore
     {
         private readonly Dictionary<IPlugin, List<PluginDbContext>> _contexts = new Dictionary<IPlugin, List<PluginDbContext>>();
 
-        public void RegisterContextsByConvention(IPlugin plugin)
+        public void RegisterContextsByConvention(IPlugin plugin, EntityFrameworkBuilder entityFrameworkBuilder)
         {
             var contextTypes = plugin.FindTypes<PluginDbContext>()
                 .Where(c => !c.GetCustomAttributes(typeof(DontAutoRegisterAttribute), true).Any());

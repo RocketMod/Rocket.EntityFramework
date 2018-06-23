@@ -14,6 +14,7 @@ namespace Rocket.EntityFrameworkCore
         private readonly ILogger _logger;
         private bool _wasMigrated;
         private bool _wasCreated;
+
         public EntityFrameworkBuilder(IEntityFrameworkService service, IPlugin plugin)
         {
             _service = service;
@@ -75,6 +76,11 @@ namespace Rocket.EntityFrameworkCore
 
             _wasCreated = true;
             return this;
+        }
+
+        public void AddEntityFrameworkCore()
+        {
+            _service.RegisterContextsByConvention(_plugin, this);
         }
     }
 }
