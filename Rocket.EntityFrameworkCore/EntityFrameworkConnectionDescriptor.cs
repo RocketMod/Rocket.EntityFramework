@@ -28,8 +28,8 @@ namespace Rocket.EntityFrameworkCore
                     _config.Load(_context, new EntityFrameworkProvidersConfiguration());
                 }
                 var conf = _config.Get<EntityFrameworkProvidersConfiguration>();
-                return conf.ConnectionProviders.FirstOrDefault(c =>
-                    c.ProviderName.Equals(conf.SelectedProvider, StringComparison.OrdinalIgnoreCase));
+                return conf.Connections.FirstOrDefault(c =>
+                    c.ConnectionName.Equals(conf.DefaultConnection, StringComparison.OrdinalIgnoreCase));
             }
         }
     }
@@ -37,39 +37,45 @@ namespace Rocket.EntityFrameworkCore
     public class EntityFrameworkProvidersConfiguration
     {
         [Comment("The connection provider to use.")]
-        public string SelectedProvider = "MySQL";
+        public string DefaultConnection = "MySQL";
 
         [ConfigArray(ElementName = "ConnectionProvider")]
         [Comment("For connection strings, please have a look at https://www.connectionstrings.com/.")]
-        public ConnectionProviderInfo[] ConnectionProviders { get; set; } =
+        public ConnectionProviderInfo[] Connections { get; set; } =
         {
             new ConnectionProviderInfo
             {
+                ConnectionName = "DefaultInMemory",
                 ProviderName = "InMemory",
                 ConnectionString = "MyDatabaseName"
             },
             new ConnectionProviderInfo
             {
+                ConnectionName = "DefaultMySql",
                 ProviderName = "MySql",
                 ConnectionString = "SERVER=localhost; DATABASE=unturned; UID=myUsername; PASSWORD=myPassword"
             },
             new ConnectionProviderInfo
             {
+                ConnectionName = "DefaultPostgreSql",
                 ProviderName = "PostgreSql",
                 ConnectionString = "MyDatabaseName"
             },
             new ConnectionProviderInfo
             {
+                ConnectionName = "DefaultSqlite",
                 ProviderName = "Sqlite",
                 ConnectionString = "Data Source={PluginDir}\\Plugin.db;Version=3;"
             },
             new ConnectionProviderInfo
             {
+                ConnectionName = "DefaultSqlServer",
                 ProviderName = "SqlServer",
                 ConnectionString = "Server=localhost;Database=myDataBase;User Id=myUsername;Password=myPassword;"
             },
             new ConnectionProviderInfo
             {
+                ConnectionName = "DefaultSqlServerCompact",
                 ProviderName = "SqlServerCompact",
                 ConnectionString = "Data Source={PluginDir}\\Plugin.sdf;Persist Security Info=False;"
             }

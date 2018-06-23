@@ -3,6 +3,7 @@
     public class ConnectionProviderInfo
     {
         public string ProviderName { get; set; }
+        public string ConnectionName { get; set; }
         public string ConnectionString { get; set; }
     }
 }

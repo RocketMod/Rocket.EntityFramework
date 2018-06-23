@@ -4,7 +4,7 @@ namespace Rocket.EntityFrameworkCore.Sqlite
 {
     public class SqliteDatabaseProvider : IEntityFrameworkDatabaseProvider
     {
-        public string DriverName => "Sqlite";
+        public string ProviderName => "Sqlite";
         public void UseFor(DbContextOptionsBuilder options, string connectionString)
         {
             options.UseSqlite(connectionString);

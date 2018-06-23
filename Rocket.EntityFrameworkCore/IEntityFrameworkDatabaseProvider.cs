@@ -4,7 +4,7 @@ namespace Rocket.EntityFrameworkCore
 {
     public interface IEntityFrameworkDatabaseProvider
     {
-        string DriverName { get; }
+        string ProviderName { get; }
         void UseFor(DbContextOptionsBuilder options, string connectionString);
     }
 }

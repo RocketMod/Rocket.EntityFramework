@@ -22,7 +22,7 @@ namespace Rocket.EntityFrameworkCore
         {
             base.OnConfiguring(optionsBuilder);
             var databaseProvider = _plugin.Container.ResolveAll<IEntityFrameworkDatabaseProvider>()
-                .FirstOrDefault(c => c.DriverName.Equals(ConnectProviderInfo.ProviderName, StringComparison.OrdinalIgnoreCase));
+                .FirstOrDefault(c => c.ProviderName.Equals(ConnectProviderInfo.ProviderName, StringComparison.OrdinalIgnoreCase));
 
             if (databaseProvider == null)
                 throw new Exception("Failed to resolve database provider: " + ConnectProviderInfo.ProviderName);
