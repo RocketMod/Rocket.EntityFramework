@@ -36,20 +36,42 @@ namespace Rocket.EntityFrameworkCore
 
     public class EntityFrameworkProvidersConfiguration
     {
+        [Comment("The connection provider to use.")]
         public string SelectedProvider = "MySQL";
 
         [ConfigArray(ElementName = "ConnectionProvider")]
+        [Comment("For connection strings, please have a look at https://www.connectionstrings.com/.")]
         public ConnectionProviderInfo[] ConnectionProviders { get; set; } =
         {
             new ConnectionProviderInfo
             {
-                ProviderName = "MySQL",
-                ConnectionString = "SERVER=localhost; DATABASE=unturned; UID=myUsername; PASSWORD=myPassword",
+                ProviderName = "InMemory",
+                ConnectionString = "MyDatabaseName"
             },
             new ConnectionProviderInfo
             {
-                ProviderName = "SQLite",
-                ConnectionString = "Data Source={PluginDir}\\Plugin.db;Version=3;",
+                ProviderName = "MySql",
+                ConnectionString = "SERVER=localhost; DATABASE=unturned; UID=myUsername; PASSWORD=myPassword"
+            },
+            new ConnectionProviderInfo
+            {
+                ProviderName = "PostgreSql",
+                ConnectionString = "MyDatabaseName"
+            },
+            new ConnectionProviderInfo
+            {
+                ProviderName = "Sqlite",
+                ConnectionString = "Data Source={PluginDir}\\Plugin.db;Version=3;"
+            },
+            new ConnectionProviderInfo
+            {
+                ProviderName = "SqlServer",
+                ConnectionString = "Server=localhost;Database=myDataBase;User Id=myUsername;Password=myPassword;"
+            },
+            new ConnectionProviderInfo
+            {
+                ProviderName = "SqlServerCompact",
+                ConnectionString = "Data Source={PluginDir}\\Plugin.sdf;Persist Security Info=False;"
             }
         };
     }
