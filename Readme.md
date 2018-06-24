@@ -2,9 +2,11 @@
 
 Provides EntityFrameworkCore integrations for RocketMod .NET Game Server Plugin Framework.
 
-To use in your plugins, add `Rocket.EntityFrameworkCore` to your plugin from NuGet and then use 
+To use in your plugins, add `Rocket.EntityFrameworkCore` to your plugin from NuGet and then use in your Load(): 
 ```cs
-plugin.AddEntityFrameworkCore();
+this
+  .GetEntityFrameworkCoreBuilder()
+  .AddEntityFrameworkCore();
 ```
 
 After that just add your normal DbContext's by extending `PluginDbContext` and this will handle the rest.
